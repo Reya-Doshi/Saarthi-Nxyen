@@ -16,7 +16,7 @@ const USER_KEY = "saarthi-user";
 const JOURNAL_KEY = "saarthi-journal-entries";
 
 function currentPage() {
-    return window.location.pathname;
+    return location.pathname;
 }
 
 function isHomePage() {
@@ -29,11 +29,11 @@ function enforceAuth() {
     const isLoggedIn = Boolean(localStorage.getItem(AUTH_KEY));
 
     if (!isAuthPage && !isLoggedIn) {
-        window.location.href = "/auth";
+        window.location.hash = "/auth";
     }
 
     if (isAuthPage && isLoggedIn) {
-        window.location.href = "/";
+        window.location.hash = "/";
     }
 }
 
@@ -144,7 +144,7 @@ if (profileToggle && profileMenu) {
 if (logoutBtn) {
     logoutBtn.addEventListener("click", () => {
         localStorage.removeItem(AUTH_KEY);
-        window.location.href = "/auth";
+        window.location.hash = "/auth";
     });
 }
 
@@ -608,7 +608,7 @@ function initAuthPage() {
             localStorage.setItem(USER_KEY, JSON.stringify({ name, email, number, password }));
             localStorage.setItem(AUTH_KEY, "signup");
             localStorage.setItem("saarthi-last-login", new Date().toISOString());
-            window.location.href = "/";
+            window.location.hash = "/";
         });
     }
 
@@ -617,7 +617,7 @@ function initAuthPage() {
         anonBtn.addEventListener("click", () => {
             localStorage.setItem(AUTH_KEY, "anonymous");
             localStorage.setItem("saarthi-last-login", new Date().toISOString());
-            window.location.href = "/";
+            window.location.hash = "/";
         });
     }
 
@@ -645,7 +645,7 @@ function initAuthPage() {
 
             localStorage.setItem(AUTH_KEY, "signin");
             localStorage.setItem("saarthi-last-login", new Date().toISOString());
-            window.location.href = "/";
+            window.location.hash = "/";
         });
     }
 }
